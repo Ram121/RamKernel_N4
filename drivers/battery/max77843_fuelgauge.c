@@ -8,6 +8,10 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
+ *
+ *
+ * This script file Also contains the Extended Battery Modification
+ * Created by TheLoneWolf20
  */
 
 #define DEBUG
@@ -357,7 +361,7 @@ static int max77843_fg_read_soc(struct max77843_fuelgauge_data *fuelgauge)
 		return -1;
 	}
 
-	soc = ((data[1] * 100) + (data[0] * 100 / 256)) / 10;
+	soc = max77843_fg_read_vfsoc(fuelgauge);
 	vf_soc = max77843_fg_read_vfsoc(fuelgauge);
 
 #ifdef BATTERY_LOG_MESSAGE
