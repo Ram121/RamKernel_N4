@@ -27,6 +27,8 @@ static bool enable_wlan_ctrl_wake_ws = false;
 module_param(enable_wlan_ctrl_wake_ws, bool, 0644); 
 static bool enable_wlan_wake_ws = false; 
 module_param(enable_wlan_wake_ws, bool, 0644);
+static bool enable_bluedroid_timer_ws = false;
+module_param(enable_bluedroid_timer_ws, bool, 0644);
 
 #include "power.h"
 
@@ -393,6 +395,9 @@ EXPORT_SYMBOL_GPL(device_set_wakeup_enable);
 static void wakeup_source_activate(struct wakeup_source *ws)
 {
 	unsigned int cec;
+
+	if (!enable_bluedroid_timer_ws && !strcmp(ws->name, "bluedroid_timer"))
+		return;
 
 	if (!enable_si_ws && !strcmp(ws->name, "sensor_ind")) {
 		pr_info("wakeup source sensor_ind activate skipped\n");
