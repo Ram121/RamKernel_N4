@@ -1,0 +1,24 @@
+ui_print("  ");
+ 
+ui_print("***********************");
+
+show_progress(0.2, 1);
+
+run_program("/sbin/busybox", "mount", "/system");
+ui_print("Flashing RamKernel.....");
+package_extract_file("boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
+
+package_extract_dir("ram/system", "/system");
+set_perm_recursive(1000, 1000, 0775, 0644, "/system/app");
+set_perm_recursive(1000, 1000, 0775, 0644, "/system/priv-app");
+set_perm_recursive(1000, 1000, 0775, 0644, "/system/framework");
+package_extract_dir("ram/temp", "/temp");
+set_perm(0, 0, 0755, "/temp/runme.sh");
+run_program("/temp/runme.sh");
+ui_print(" ");
+
+run_program("/sbin/busybox", "umount", "/system"); 
+show_progress(1, 1);
+ui_print("Support RamKernel by visiting thread and giving thanks..");
+ui_print(" Done ");
+ui_print("***********************");
