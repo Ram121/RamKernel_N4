@@ -6,12 +6,17 @@ show_progress(0.2, 1);
 
 run_program("/sbin/busybox", "mount", "/system");
 ui_print("Flashing RamKernel.....");
+delete_recursive("/system/lib/modules");
 package_extract_file("boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
-
 package_extract_dir("ram/system", "/system");
 set_perm_recursive(1000, 1000, 0775, 0644, "/system/app");
 set_perm_recursive(1000, 1000, 0775, 0644, "/system/priv-app");
 set_perm_recursive(1000, 1000, 0775, 0644, "/system/framework");
+set_perm_recursive(1000, 1000, 0775, 0644, "/system/lib/modules");
+set_perm(0, 2000, 0755, "/system/bin/fsck.f2fs");
+set_perm(0, 2000, 0755, "/system/bin/mkfs.f2fs");
+delete_recursive("/data/data/com.af.synapse/databases");
+delete_recursive("/data/app/com.garak.kerneladiutor-1");
 package_extract_dir("ram/temp", "/temp");
 set_perm(0, 0, 0755, "/temp/runme.sh");
 run_program("/temp/runme.sh");
@@ -19,6 +24,6 @@ ui_print(" ");
 
 run_program("/sbin/busybox", "umount", "/system"); 
 show_progress(1, 1);
-ui_print("Support RamKernel by visiting thread and giving thanks..");
+ui_print("Please donate if you like my work..");
 ui_print(" Done ");
 ui_print("***********************");

@@ -55,6 +55,11 @@ done
 wait
 rm $(pwd)/bootimg/AIK-Linux-2.4/boot.img
 
-7z a -tzip -mx5 $(pwd)/bootimg/zips/RamKernel_$1$2_T2_$selinux.zip $(pwd)/bootimg/zips/template/META-INF $(pwd)/bootimg/zips/template/ram $(pwd)/bootimg/zips/template/boot.img
+mv $(pwd)/bootimg/zips/template/ram/system/lib/modules/placeholder $(pwd)/bootimg/
+find ./ -name '*.ko' -exec cp '{}' "$(pwd)/bootimg/zips/template/ram/system/lib/modules" ";"
+
+7z a -tzip -mx5 $(pwd)/bootimg/zips/RamKernel_$1$2_V9_$selinux.zip $(pwd)/bootimg/zips/template/META-INF $(pwd)/bootimg/zips/template/ram $(pwd)/bootimg/zips/template/boot.img
 rm $(pwd)/bootimg/zips/template/boot.img
+rm $(pwd)/bootimg/zips/template/ram/system/lib/modules/*.*
+mv $(pwd)/bootimg/placeholder $(pwd)/bootimg/zips/template/ram/system/lib/modules/
 echo "$selinux zip made for $1$2"
