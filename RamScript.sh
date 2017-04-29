@@ -58,7 +58,7 @@ rm $(pwd)/bootimg/AIK-Linux-2.4/boot.img
 mv $(pwd)/bootimg/zips/template/ram/system/lib/modules/placeholder $(pwd)/bootimg/
 find ./ -name '*.ko' -exec cp '{}' "$(pwd)/bootimg/zips/template/ram/system/lib/modules" ";"
 
-7z a -tzip -mx5 $(pwd)/bootimg/zips/RamKernel_$1$2_V9_$selinux.zip $(pwd)/bootimg/zips/template/META-INF $(pwd)/bootimg/zips/template/ram $(pwd)/bootimg/zips/template/boot.img
+7z a -tzip -mx5 $(pwd)/bootimg/zips/RamKernel_$1$2_RC2_$selinux.zip $(pwd)/bootimg/zips/template/META-INF $(pwd)/bootimg/zips/template/ram $(pwd)/bootimg/zips/template/boot.img
 rm $(pwd)/bootimg/zips/template/boot.img
 rm $(pwd)/bootimg/zips/template/ram/system/lib/modules/*.*
 mv $(pwd)/bootimg/placeholder $(pwd)/bootimg/zips/template/ram/system/lib/modules/

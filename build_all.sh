@@ -1,12 +1,6 @@
 #!/bin/bash
 
-./RamKernel.sh N910 G Y 0
-
-./RamKernel.sh N910 P Y 0
-
 ./RamKernel.sh N910 V Y 0
-
-./RamKernel.sh N910 T Y 0
 
 ./RamKernel.sh N910 W8 Y 0
 

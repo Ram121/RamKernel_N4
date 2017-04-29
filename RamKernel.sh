@@ -49,7 +49,7 @@ if [ "$4" = "1" ]; then
 	echo ""
 fi
 
-sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_T1"/CONFIG_LOCALVERSION="-RamKernel_v9"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
+sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC1_T1"/CONFIG_LOCALVERSION="-RamKernel_RC2"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
 
 export ARCH=arm
 export CROSS_COMPILE=/opt/toolchains/UBERTC-arm-eabi-4.8/bin/arm-eabi-
