@@ -4,6 +4,16 @@ rm -r $(pwd)/output
 rm arch/arm/boot/zImage
 rm bootimg/boot.img-dtb
 
+file=$(pwd)/bootimg/G901
+if [ -f "$file" ]
+then
+	echo "G901F Patch found, removing..."
+	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/Back_from_G901/Back.max77804k_charger.c.patch
+	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/Back_from_G901/Back.sec_board-8084.c.patch
+else
+	echo "No action required, G901F patch not present.."
+fi
+
 if [ "$1" = "N910" ]; then 
 	model=trlte
 fi
@@ -49,6 +59,12 @@ if [ "$4" = "1" ]; then
 	echo ""
 fi
 
+if [ "$1" = "G901" ]; then 
+	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/For_G901/G901.max77804k_charger.c.patch
+	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/For_G901/G901.sec_board-8084.c.patch
+	$(pwd)/bootimg/>G901
+fi
+
 sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC1_T1"/CONFIG_LOCALVERSION="-RamKernel_RC2"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
 
 export ARCH=arm
@@ -59,6 +75,12 @@ make -C $(pwd) O=output VARIANT_DEFCONFIG=apq8084_sec_"$model"_"$variant"_defcon
 make -C $(pwd) O=output
 cp output/arch/arm/boot/Image $(pwd)/arch/arm/boot/zImage
 ./tools/dtbTool -o ./bootimg/boot.img-dtb -s 4096 -p ./output/scripts/dtc/ ./output/arch/arm/boot/dts/
+
+if [ "$1" = "G901" ]; then 
+	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/Back_from_G901/Back.max77804k_charger.c.patch
+	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/Back_from_G901/Back.sec_board-8084.c.patch
+	rm $(pwd)/bootimg/>G901
+fi
 
 if [ "$3" = "N" ]; then
     echo "Not making zip"
