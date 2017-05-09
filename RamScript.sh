@@ -31,7 +31,7 @@ cp $(pwd)/bootimg/patches/environ-rc/N7 $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/ini
 cp $(pwd)/bootimg/boot.img-dtb $(pwd)/bootimg/AIK-Linux-2.7/split_img/boot.img-dtb
 patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/init.rc $(pwd)/bootimg/patches/init.d/init.rc.patch
 #patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/init.target.rc $(pwd)/bootimg/patches/F2FS/init.target.rc.patch
-cp $(pwd)/bootimg/patches/init.d/init.d_support.sh $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/
+cp $(pwd)/bootimg/patches/init.d/initd-support.sh $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/sbin
 
 #cp -r $(pwd)/bootimg/patches/Synapse_support/ramdisk/* $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/
 #patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/ueventd.rc $(pwd)/bootimg/patches/Synapse_support/ueventd.rc.patch
