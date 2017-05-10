@@ -97,6 +97,7 @@ if [[ ( "$1" = "910" ) && ( "$2" = "F" ) ]]; then
 fi
 if [[ ( "$1" = "915" ) && ( "$2" = "F" ) ]]; then
 	./RamScript.sh $1 $2Y $4 
+	./RamScript.sh $1 G $4 
 fi
 if [[ ( "$1" = "915" ) && ( "$2" = "FY" ) ]]; then
 	./RamScript.sh $1 F $4
