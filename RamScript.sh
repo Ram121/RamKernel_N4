@@ -48,7 +48,7 @@ do
 "$i" &
 done
 wait
-cp $(pwd)/bootimg/AIK-Linux-2.7/image-new.img $(pwd)/bootimg/zips/template/boot.img
+cp $(pwd)/bootimg/AIK-Linux-2.7/image-new.img $(pwd)/bootimg/zips/template/ram/boot.img
 
 for i in $(pwd)/bootimg/AIK-Linux-2.7/cleanup.sh
 do
@@ -61,7 +61,7 @@ mv $(pwd)/bootimg/zips/template/ram/system/lib/modules/placeholder $(pwd)/bootim
 find ./ -name '*.ko' -exec cp '{}' "$(pwd)/bootimg/zips/template/ram/system/lib/modules" ";"
 
 7z a -tzip -mx5 $(pwd)/bootimg/zips/RamKernel_$1$2_RC2_$selinux.zip $(pwd)/bootimg/zips/template/META-INF $(pwd)/bootimg/zips/template/ram $(pwd)/bootimg/zips/template/boot.img
-rm $(pwd)/bootimg/zips/template/boot.img
+rm $(pwd)/bootimg/zips/template/ram/boot.img
 rm $(pwd)/bootimg/zips/template/ram/system/lib/modules/*.*
 mv $(pwd)/bootimg/placeholder $(pwd)/bootimg/zips/template/ram/system/lib/modules/
 echo "$selinux zip made for $1$2"

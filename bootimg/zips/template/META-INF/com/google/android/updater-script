@@ -7,7 +7,7 @@ show_progress(0.2, 1);
 run_program("/sbin/busybox", "mount", "/system");
 ui_print("Flashing RamKernel.....");
 delete_recursive("/system/lib/modules");
-package_extract_file("boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
+package_extract_file("ram/boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
 package_extract_dir("ram/system", "/system");
 set_perm_recursive(1000, 1000, 0775, 0644, "/system/app");
 set_perm_recursive(1000, 1000, 0775, 0644, "/system/priv-app");
@@ -24,6 +24,6 @@ ui_print(" ");
 
 run_program("/sbin/busybox", "umount", "/system"); 
 show_progress(1, 1);
-ui_print("Please donate if you like my work..");
+ui_print("Donate if you like my work..");
 ui_print(" Done ");
 ui_print("***********************");

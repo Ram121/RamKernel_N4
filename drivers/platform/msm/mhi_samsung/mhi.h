@@ -22,7 +22,6 @@
 #include <linux/pm.h>
 #include <linux/completion.h>
 
-
 typedef struct osal_thread osal_thread;
 typedef struct mhi_meminfo mhi_meminfo;
 typedef struct pci_dev pci_dev;

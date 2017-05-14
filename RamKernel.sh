@@ -62,7 +62,9 @@ fi
 if [ "$1" = "G901" ]; then 
 	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/For_G901/G901.max77804k_charger.c.patch
 	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/For_G901/G901.sec_board-8084.c.patch
-	$(pwd)/bootimg/>G901
+	cd $(pwd)/bootimg
+	>G901
+	cd -
 fi
 
 sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC1_T1"/CONFIG_LOCALVERSION="-RamKernel_RC2"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
@@ -79,7 +81,9 @@ cp output/arch/arm/boot/Image $(pwd)/arch/arm/boot/zImage
 if [ "$1" = "G901" ]; then 
 	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/Back_from_G901/Back.max77804k_charger.c.patch
 	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/Back_from_G901/Back.sec_board-8084.c.patch
-	rm $(pwd)/bootimg/>G901
+	cd $(pwd)/bootimg
+	rm G901
+	cd -
 fi
 
 if [ "$3" = "N" ]; then

@@ -149,6 +149,10 @@ config HAVE_LATENCYTOP_SUPPORT
 	depends on !SMP
 	default y
 
+config ILLEGAL_POINTER_VALUE 
+	hex 
+	default 0xdead000000000000 
+
 config LOCKDEP_SUPPORT
 	bool
 	default y
