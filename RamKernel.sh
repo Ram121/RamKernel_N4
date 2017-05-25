@@ -70,8 +70,7 @@ fi
 sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC2"/CONFIG_LOCALVERSION="-RamKernel_RC3"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
 
 export ARCH=arm
-export CROSS_COMPILE=/opt/toolchains/UBERTC-arm-eabi-5.3/bin/arm-eabi-
-#/opt/toolchains/gcc-linaro-5.1-x86_64_arm-eabi/bin /opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_arm-eabi/bin
+export CROSS_COMPILE=/opt/toolchains/UBERTC-arm-eabi-4.8/bin/arm-eabi-
 mkdir output
 make -C $(pwd) O=output VARIANT_DEFCONFIG=apq8084_sec_"$model"_"$variant"_defconfig apq8084_sec_defconfig SELINUX_DEFCONFIG=selinux_defconfig
 make -C $(pwd) O=output
@@ -90,19 +89,19 @@ if [ "$3" = "N" ]; then
     echo "Not making zip"
     exit
 else
-./RamScript.sh $1 $2 $4
+./RamScript.sh $1 $2 $4 $5
 fi
 
 if [ "$2" = "G" ]; then
-	./RamScript.sh $1 F $4
+	./RamScript.sh $1 F $4 $5
 fi
 if [[ ( "$1" = "910" ) && ( "$2" = "F" ) ]]; then
-	./RamScript.sh $1 G $4
+	./RamScript.sh $1 G $4 $5
 fi
 if [[ ( "$1" = "915" ) && ( "$2" = "F" ) ]]; then
-	./RamScript.sh $1 $2Y $4 
-	./RamScript.sh $1 G $4 
+	./RamScript.sh $1 $2Y $4 $5
+	./RamScript.sh $1 G $4 $5
 fi
 if [[ ( "$1" = "915" ) && ( "$2" = "FY" ) ]]; then
-	./RamScript.sh $1 F $4
+	./RamScript.sh $1 F $4 $5
 fi
