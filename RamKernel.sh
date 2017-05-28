@@ -10,6 +10,8 @@ then
 	echo "G901F Patch found, removing..."
 	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/Back_from_G901/Back.max77804k_charger.c.patch
 	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/Back_from_G901/Back.sec_board-8084.c.patch
+	patch $(pwd)/drivers/staging/Makefile $(pwd)/bootimg/patches/Back_from_G901/Drivers.Staging.Makefile.revert.patch
+	patch $(pwd)/drivers/staging/Kconfig $(pwd)/bootimg/patches/Back_from_G901/Drivers.Staging.Kconfig.revert.patch
 else
 	echo "No action required, G901F patch not present.."
 fi
@@ -62,6 +64,8 @@ fi
 if [ "$1" = "G901" ]; then 
 	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/For_G901/G901.max77804k_charger.c.patch
 	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/For_G901/G901.sec_board-8084.c.patch
+	patch $(pwd)/drivers/staging/Makefile $(pwd)/bootimg/patches/For_G901/Drivers.Staging.Makefile.901.patch
+	patch $(pwd)/drivers/staging/Kconfig $(pwd)/bootimg/patches/For_G901/Drivers.Staging.Kconfig.901.patch
 	cd $(pwd)/bootimg
 	>G901
 	cd -
@@ -80,6 +84,8 @@ cp output/arch/arm/boot/Image $(pwd)/arch/arm/boot/zImage
 if [ "$1" = "G901" ]; then 
 	patch $(pwd)/drivers/battery/max77804k_charger.c $(pwd)/bootimg/patches/Back_from_G901/Back.max77804k_charger.c.patch
 	patch $(pwd)/drivers/battery/sec_board-8084.c $(pwd)/bootimg/patches/Back_from_G901/Back.sec_board-8084.c.patch
+	patch $(pwd)/drivers/staging/Makefile $(pwd)/bootimg/patches/Back_from_G901/Drivers.Staging.Makefile.revert.patch
+	patch $(pwd)/drivers/staging/Kconfig $(pwd)/bootimg/patches/Back_from_G901/Drivers.Staging.Kconfig.revert.patch
 	cd $(pwd)/bootimg
 	rm G901
 	cd -

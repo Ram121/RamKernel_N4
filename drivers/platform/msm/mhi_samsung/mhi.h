@@ -14,8 +14,8 @@
 #define _H_MHI
 
 #include <mach/msm_pcie.h>
-#include "msm_mhi.h"
-#include "mhi_macros.h"
+#include <msm_mhi.h>
+#include <mhi_macros.h>
 #include <linux/types.h>
 #include <linux/spinlock_types.h>
 #include <linux/hrtimer.h>
