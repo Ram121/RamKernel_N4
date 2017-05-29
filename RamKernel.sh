@@ -67,7 +67,7 @@ if [ "$1" = "G901" ]; then
 	cd -
 fi
 
-sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC2"/CONFIG_LOCALVERSION="-RamKernel_RC3"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
+sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC3"/CONFIG_LOCALVERSION="-RamKernel_RC4"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
 
 export ARCH=arm
 export CROSS_COMPILE=/opt/toolchains/UBERTC-arm-eabi-4.8/bin/arm-eabi-
