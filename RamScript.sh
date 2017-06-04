@@ -33,7 +33,11 @@ patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/init.rc $(pwd)/bootimg/patches/init.d
 #patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/init.target.rc $(pwd)/bootimg/patches/F2FS/init.target.rc.patch
 cp $(pwd)/bootimg/patches/init.d/initd-support.sh $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/sbin
 cp $(pwd)/bootimg/patches/init.d/init.d_support.sh $(pwd)/bootimg/AIK-Linux-2.7/ramdisk
-
+if [ "$5" = "1" ]; then
+	patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/default.prop $(pwd)/bootimg/patches/bootimg_debugging_patch/adb.default.prop.patch
+	rm $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/sbin/adbd
+	cp $(pwd)/bootimg/patches/bootimg_debugging_patch/adbd $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/sbin/adbd
+fi
 #cp -r $(pwd)/bootimg/patches/Synapse_support/ramdisk/* $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/
 #patch $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/ueventd.rc $(pwd)/bootimg/patches/Synapse_support/ueventd.rc.patch
 #cp $(pwd)/bootimg/patches/Synapse_support/ramdisk_fix_permissions.sh $(pwd)/bootimg/AIK-Linux-2.7/ramdisk/ramdisk_fix_permissions.sh

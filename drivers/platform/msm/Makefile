@@ -6,7 +6,7 @@ ccflags-y += -Idrivers/misc/
 
 obj-$(CONFIG_MSM_MHI) += mhi/
 obj-$(CONFIG_MSM_MHI_UCI) += mhi_uci/
-obj-$(CONFIG_QCOM_MHI) += mhi_samsung/
+#obj-$(CONFIG_QCOM_MHI) += mhi_samsung/
 obj-$(CONFIG_MSM_SSBI) += ssbi.o
 obj-$(CONFIG_USB_BAM) += usb_bam.o
 obj-$(CONFIG_IPA) += ipa/

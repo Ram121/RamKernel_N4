@@ -89,19 +89,19 @@ if [ "$3" = "N" ]; then
     echo "Not making zip"
     exit
 else
-./RamScript.sh $1 $2 $4 $5
+./RamScript.sh $1 $2 $4 $5 $6
 fi
 
 if [ "$2" = "G" ]; then
-	./RamScript.sh $1 F $4 $5
+	./RamScript.sh $1 F $4 $5 $6
 fi
 if [[ ( "$1" = "910" ) && ( "$2" = "F" ) ]]; then
-	./RamScript.sh $1 G $4 $5
+	./RamScript.sh $1 G $4 $5 $6
 fi
 if [[ ( "$1" = "915" ) && ( "$2" = "F" ) ]]; then
-	./RamScript.sh $1 $2Y $4 $5
-	./RamScript.sh $1 G $4 $5
+	./RamScript.sh $1 $2Y $4 $5 $6
+	./RamScript.sh $1 G $4 $5 $6
 fi
 if [[ ( "$1" = "915" ) && ( "$2" = "FY" ) ]]; then
-	./RamScript.sh $1 F $4 $5
+	./RamScript.sh $1 F $4 $5 $6
 fi
