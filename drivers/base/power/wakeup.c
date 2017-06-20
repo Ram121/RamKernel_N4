@@ -31,6 +31,10 @@ static bool enable_bluedroid_timer_ws = false;
 module_param(enable_bluedroid_timer_ws, bool, 0644);
 static bool enable_bluesleep_ws = false;
 module_param(enable_bluesleep_ws, bool, 0644);
+static bool enable_msm_serial_hs_dma_ws = false;
+module_param(enable_msm_serial_hs_dma_ws, bool, 0644);
+static bool enable_msm_serial_hs_rx_ws = false;
+module_param(enable_msm_serial_hs_rx_ws, bool, 0644);
 
 #include "power.h"
 
@@ -430,6 +434,16 @@ static void wakeup_source_activate(struct wakeup_source *ws)
 
 	if (!enable_wlan_wake_ws && !strcmp(ws->name, "bluesleep")) {
                 pr_info("wakeup source bluesleep activate skipped\n");
+                return;
+        }
+
+	if (!enable_wlan_wake_ws && !strcmp(ws->name, "msm_serial_hs_dma")) {
+                pr_info("wakeup source msm_serial_hs_dma activate skipped\n");
+                return;
+        }
+
+	if (!enable_wlan_wake_ws && !strcmp(ws->name, "msm_serial_hs_rx")) {
+                pr_info("wakeup source msm_serial_hs_rx activate skipped\n");
                 return;
         }
 
