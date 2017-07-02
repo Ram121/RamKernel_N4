@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2013-2014, 2016, The Linux Foundation. All rights reserved.
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 2 and
 * only version 2 as published by the Free Software Foundation.
@@ -18,6 +18,9 @@
 
 #include "msm-dolby-dap-config.h"
 
+#ifndef DOLBY_PARAM_VCNB_MAX_LENGTH
+#define DOLBY_PARAM_VCNB_MAX_LENGTH 40
+#endif
 /* dolby endp based parameters */
 struct dolby_dap_endp_params_s {
 	int device;
@@ -843,6 +846,11 @@ int msm_dolby_dap_param_visualizer_control_get(struct snd_kcontrol *kcontrol,
 	uint32_t param_payload_len =
 		DOLBY_PARAM_PAYLOAD_SIZE * sizeof(uint32_t);
 	int port_id = dolby_dap_params_states.port_id;
+	if (length > DOLBY_PARAM_VCNB_MAX_LENGTH || length <= 0) {
+		pr_err("%s Incorrect VCNB length", __func__);
+		ucontrol->value.integer.value[0] = 0;
+		return -EINVAL;
+	}
 	if (port_id == DOLBY_INVALID_PORT_ID) {
 		pr_debug("%s, port_id not set, returning error", __func__);
 		ucontrol->value.integer.value[0] = 0;

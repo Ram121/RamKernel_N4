@@ -35,6 +35,7 @@
 #include <linux/eventfd.h>
 #include <linux/blkdev.h>
 #include <linux/compat.h>
+#include <linux/personality.h>
 
 #include <asm/kmap_types.h>
 #include <asm/uaccess.h>
@@ -152,6 +153,9 @@ static int aio_setup_ring(struct kioctx *ctx)
 	struct mm_struct *mm = current->mm;
 	unsigned long size, populate;
 	int nr_pages;
+
+	if (current->personality & READ_IMPLIES_EXEC)
+		return -EPERM;
 
 	/* Compensate for the ring buffer's head/tail overlap entry */
 	nr_events += 2;	/* 1 is required, 2 for good luck */
@@ -310,6 +314,7 @@ static void free_ioctx(struct kioctx *ctx)
 
 		avail = (head <= ctx->tail ? ctx->tail : ctx->nr_events) - head;
 
+		atomic_sub(avail, &ctx->reqs_active);
 		head += avail;
 		head %= ctx->nr_events;
 	}
@@ -677,7 +682,6 @@ void aio_complete(struct kiocb *iocb, long res, long res2)
 put_rq:
 	/* everything turned out well, dispose of the aiocb. */
 	aio_put_req(iocb);
-	atomic_dec(&ctx->reqs_active);
 
 	/*
 	 * We have to order our ring_info tail store above and test
@@ -717,8 +721,6 @@ static long aio_read_events_ring(struct kioctx *ctx,
 	if (head == ctx->tail)
 		goto out;
 
-	head %= ctx->nr_events;
-
 	while (ret < nr) {
 		long avail;
 		struct io_event *ev;
@@ -757,6 +759,8 @@ static long aio_read_events_ring(struct kioctx *ctx,
 	flush_dcache_page(ctx->ring_pages[0]);
 
 	pr_debug("%li  h%u t%u\n", ret, head, ctx->tail);
+
+	atomic_sub(ret, &ctx->reqs_active);
 out:
 	mutex_unlock(&ctx->ring_lock);
 
