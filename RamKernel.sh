@@ -1,4 +1,5 @@
 #!/bin/bash
+#Example to run script ./RamKernel.sh N910 G Y 0 7
 
 rm -r $(pwd)/output
 rm arch/arm/boot/zImage
@@ -67,7 +68,7 @@ if [ "$1" = "G901" ]; then
 	cd -
 fi
 
-sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC5"/CONFIG_LOCALVERSION="-RamKernel_RC6"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
+sed -i '8s/CONFIG_LOCALVERSION="-RamKernel_RC6"/CONFIG_LOCALVERSION="-RamKernel_RC7"/' $(pwd)/arch/arm/configs/apq8084_sec_"$model"_"$variant"_defconfig
 
 export ARCH=arm
 export CROSS_COMPILE=/opt/toolchains/UBERTC-arm-eabi-4.8/bin/arm-eabi-
